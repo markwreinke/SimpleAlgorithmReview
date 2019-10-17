@@ -4,6 +4,7 @@ import math
 # The main funtion, first calls BuildMaxHeap in order to turn the array into a max tree
 #   Then, it steps down the array from the end, echanging the first element(which is always the largest, due to being a max tree)
 #   with the index, until the index is at position 1, in which the array is sorted.
+#   Runs in O(n lg n) time.
 def HeapSort(array):
     heapSize = BuildMaxHeap(array)
 
@@ -26,7 +27,7 @@ def LeftNode(i):
 def RightNode(i):
     return 2*i + 2
 
-# This function takes in the array, the heapsize to be considered, and the index of the end of the input heap.
+# This function takes in the array, the heapsize to be considered, and the index of the end of the input heap. This method has O(lg n) runtime.
 def MaxHeapify(array, heapSize, index):
     leftNode  = LeftNode(index)
     rightNode = RightNode(index)
@@ -47,7 +48,8 @@ def MaxHeapify(array, heapSize, index):
         array[largest] = temp
         MaxHeapify(array, heapSize, largest)
 
-# Determines the heapSize of the entire array, then runs MaxHeapify on the first n/2 nodes (since the last n/2 nodes are already 1 element heaps)
+# Determines the heapSize of the entire array, then runs MaxHeapify on the first n/2 nodes (since the last n/2 nodes are already 1 element heaps).
+#   This runs in O(n) time.
 def BuildMaxHeap(array):
     heapSize = len(array) -1
     for i in range(math.floor(heapSize/2), -1, -1):
