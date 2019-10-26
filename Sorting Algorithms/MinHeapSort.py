@@ -1,8 +1,9 @@
-# The HeapSort algorithm that sorts an array by treating it as a tree, repetitively turning it into max trees, until it is sorted.
+# The MinHeapSort algorithm that sorts an array by treating it as a tree, repetitively turning it into min trees, until it is sorted.
+# Sorts the array in decreasing order, opposite of MaxHeapSort
 import math
 
-# The main funtion, first calls BuildMaxHeap in order to turn the array into a max tree
-#   Then, it steps down the array from the end, echanging the first element(which is always the largest, due to being a max tree)
+# The main funtion, first calls BuildMinHeap in order to turn the array into a min tree
+#   Then, it steps down the array from the end, echanging the first element(which is always the smallest, due to being a min tree)
 #   with the index, until the index is at position 1, in which the array is sorted.
 #   Runs in O(n lg n) time.
 def MinHeapSort(array):
@@ -48,7 +49,7 @@ def MinHeapify(array, heapSize, index):
         array[smallest] = temp
         MinHeapify(array, heapSize, smallest)
 
-# Determines the heapSize of the entire array, then runs MaxHeapify on the first n/2 nodes (since the last n/2 nodes are already 1 element heaps).
+# Determines the heapSize of the entire array, then runs MinHeapify on the first n/2 nodes (since the last n/2 nodes are already 1 element heaps).
 #   This runs in O(n) time.
 def BuildMinHeap(array):
     heapSize = len(array) -1

@@ -1,4 +1,4 @@
-# The HeapSort algorithm that sorts an array by treating it as a tree, repetitively turning it into max trees, until it is sorted.
+# The MaxHeapSort algorithm that sorts an array by treating it as a tree, repetitively turning it into max trees, until it is sorted.
 import math
 
 # The main funtion, first calls BuildMaxHeap in order to turn the array into a max tree
