@@ -1,12 +1,19 @@
 import math
 
+
 class HeapArray():
 
     def __init__(self, array):
         self.heap = array
         self.heapSize = len(array) - 1
-        self = self.BuildMaxHeap(self)
+        # = self.BuildMaxHeap(self)
 
+    def BuildMaxHeapAlt(self, heapArray):
+        heapArray.heapSize = 0
+        for index in range(1, len(heapArray.heap) - 1):
+            heapArray = self.MaxHeapInsert(heapArray, heapArray.heap[index])
+            
+        return heapArray
 
 
     def HeapMaximum(self, heap):
@@ -25,7 +32,6 @@ class HeapArray():
         if key < heapArray.heap[index]:
             raise HeapError("New key is smaller than current key")
         heapArray.heap[index] = key
-        print(heapArray.heap, heapArray.heapSize)
         while index > 0 and heapArray.heap[HeapArray.ParentNode(index)] < heapArray.heap[index]:
             heapArray.heap[index], heapArray.heap[HeapArray.ParentNode(index)] = heapArray.heap[HeapArray.ParentNode(index)], heapArray.heap[index]
             index = HeapArray.ParentNode(index)
@@ -34,7 +40,11 @@ class HeapArray():
 
 
     def MaxHeapInsert(self, heapArray, key):
-        heapArray.heap.append(float("-inf"))
+        heapArray.heapSize += 1
+        if(heapArray.heapSize == len(heapArray.heap) - 1):
+            heapArray.heap.append(float("-inf"))
+        else:
+            heapArray.heap[heapArray.heapSize] = float("-inf")
         heapArray = self.HeapIncreaseKey(heapArray, heapArray.heapSize, key)
 
         return heapArray
@@ -85,8 +95,15 @@ class HeapArray():
 
 
 
-a = HeapArray([1,2,4,3,5,6])
+a = HeapArray([1,2,4,3, 15, 17, 0, 1, 5,6])
+print("a = ", a.heap)
+
+b = HeapArray([1,2,4,3, 15, 17, 0, 1, 5,6])
+print("b = ", b.heap)
+
+
+a = a.BuildMaxHeap(a)
 print(a.heap)
 
-a = a.MaxHeapInsert(a, 7)
-print(a.heap)
+b = b.BuildMaxHeapAlt(b)
+print(b.heap)
