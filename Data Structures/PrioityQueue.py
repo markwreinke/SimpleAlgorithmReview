@@ -1,33 +1,29 @@
 import math
 
-
+# A class to manage a maxHeap data opbject, with the ability to add an remove elements.
 class HeapArray():
 
+    # Constructor to setup the heap and heapSize.
     def __init__(self, array):
         self.heap = array
         self.heapSize = len(array) - 1
-        # = self.BuildMaxHeap(self)
+        self.heapSize = self.BuildMaxHeap(self)
 
-    def BuildMaxHeapAlt(self, heapArray):
-        heapArray.heapSize = 0
-        for index in range(1, len(heapArray.heap) - 1):
-            heapArray = self.MaxHeapInsert(heapArray, heapArray.heap[index])
-            
-        return heapArray
-
-
+    # returns the maximum element of the heap
     def HeapMaximum(self, heap):
         return heap[0];
 
+    # A function to remove the max element, calls MaxHeapify to maintain the maxHeap property
     def HeapExtractMax(self, heapArray):
         if heapArray.heapSize < 0:
             raise HeapError("Heap underflow")
         max = heapArray.heap[0]
         heapArray.heap[0] = heapArray.heap[heapArray.heapSize]
         heapArray.heapSize = heapArray.heapSize - 1
-        MaxHeapify(heap, 0)
+        self.MaxHeapify(heap, 0)
         return max, heapArray
 
+    # A subfunction for MaxHeapInsert, it inputs a key into the heap, adjusting the heap to maintain its maxheap property
     def HeapIncreaseKey(self, heapArray, index, key):
         if key < heapArray.heap[index]:
             raise HeapError("New key is smaller than current key")
@@ -38,7 +34,7 @@ class HeapArray():
 
         return heapArray
 
-
+    # Inserts an element (here called a key) into a maxHeap
     def MaxHeapInsert(self, heapArray, key):
         heapArray.heapSize += 1
         if(heapArray.heapSize == len(heapArray.heap) - 1):
@@ -83,7 +79,8 @@ class HeapArray():
             heapArray = self.MaxHeapify(heapArray, largest)
 
         return heapArray
-    # Determines the heapSize of the entire array, then runs MaxHeapify on the first n/2 nodes (since the last n/2 nodes are already 1 element heaps).
+
+    # Turns the heap into a maxHeap. Runs MaxHeapify on the first n/2 nodes (since the last n/2 nodes are already 1 element heaps).
     #   This runs in O(n) time.
     def BuildMaxHeap(self, heapArray):
         for i in range(math.floor((heapArray.heapSize)/2), -1, -1):
@@ -91,7 +88,15 @@ class HeapArray():
 
         return heapArray
 
+    # An alternate implementation of BuildMaxHeap. Turns the heap into a maxHeap. Runs MaxHeapify on the first n/2 nodes (since the last n/2 nodes are already 1 element heaps).
+    #   Does not create the same exact tree as BuildMaxHeap
+    #   This runs in O(n lg n) time.
+    def BuildMaxHeapAlt(self, heapArray):
+        heapArray.heapSize = 0
+        for index in range(1, len(heapArray.heap) - 1):
+            heapArray = self.MaxHeapInsert(heapArray, heapArray.heap[index])
 
+        return heapArray
 
 
 
